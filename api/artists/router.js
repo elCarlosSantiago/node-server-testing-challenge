@@ -11,12 +11,22 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
-  try{
-    const artist = await Artists.getById(req.params.id)
-    res.json(artist)
-  } catch(err) {
-    next(err)
+  try {
+    const artist = await Artists.getById(req.params.id);
+    res.json(artist);
+  } catch (err) {
+    next(err);
   }
-})
+});
+
+router.post('/', async (req, res, next) => {
+  const artist = req.body;
+  try {
+    const newArtist = await Artists.insert(artist);
+    res.json(newArtist);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

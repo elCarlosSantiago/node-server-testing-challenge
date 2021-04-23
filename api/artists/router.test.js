@@ -42,4 +42,18 @@ describe('Artists enpoints', () => {
       expect(res4.body).toMatchObject({ artist_name: 'MF DOOM', artist_id: 4 });
     });
   });
+  describe('[POST] /artists', () => {
+    it('adds an artist to the db', async () => {
+      const dbBeforeInsert = await db('artists');
+      await request(server).post('/api/artists').send({ artist_name: 'The Cure' });
+      const dbAfterInsert = await db('artists');
+      expect(dbAfterInsert.length - dbBeforeInsert.length).toBe(1);
+    });
+    it('returns the newly created artist', async () => {
+      const res = await request(server)
+        .post('/api/artists')
+        .send({ artist_name: 'Red Hot Chilly Peppers' });
+      expect(res.body).toMatchObject({ artist_name: 'Red Hot Chilly Peppers' });
+    });
+  });
 });
