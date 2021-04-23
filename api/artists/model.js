@@ -5,7 +5,7 @@ const getAll = () => {
 };
 
 const getById = (id) => {
-  return db('artists').where({ id }).first();
+  return db('artists').where('artist_id', id).first();
 };
 
 const insert = async (artist) => {
