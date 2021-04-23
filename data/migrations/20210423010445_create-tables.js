@@ -17,7 +17,7 @@ exports.up = function (knex) {
         .notNullable()
         .references('artist_id')
         .inTable('artists')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
         .onUpdate('RESTRICT');
     })
     .createTable('albums', (tbl) => {
@@ -29,7 +29,7 @@ exports.up = function (knex) {
         .notNullable()
         .references('artist_id')
         .inTable('artists')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
         .onUpdate('RESTRICT');
       tbl
         .integer('genre_id')
@@ -37,7 +37,7 @@ exports.up = function (knex) {
         .notNullable()
         .references('genre_id')
         .inTable('genres')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
         .onUpdate('RESTRICT');
     });
 };
