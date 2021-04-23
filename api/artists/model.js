@@ -19,8 +19,8 @@ const update = async (id, changes) => {
 };
 
 const remove = async (id) => {
-  const toBeDeleted = getById(id);
-  await db('artists').where({ id }).del();
+  const toBeDeleted = await getById(id);
+  await db('artists').where('artist_id', id).del();
   return toBeDeleted;
 };
 

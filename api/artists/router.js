@@ -29,4 +29,13 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const deletedArtist = await Artists.remove(req.params.id);
+    res.json(deletedArtist)
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

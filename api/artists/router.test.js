@@ -56,4 +56,16 @@ describe('Artists enpoints', () => {
       expect(res.body).toMatchObject({ artist_name: 'Red Hot Chilly Peppers' });
     });
   });
+  describe('[DELETE] /artists/:id', () => {
+    it('removes an artist from the db', async () => {
+      const dbBeforeDelete = await db('artists');
+      await request(server).delete('/api/artists/1');
+      const dbAfterDelete = await db('artists');
+      expect(dbBeforeDelete.length - dbAfterDelete.length).toBe(1);
+    });
+    it('returns the deleted artist', async () => {
+      const res = await request(server).delete('/api/artists/1');
+      expect(res.body).toMatchObject({ artist_name: '4 Non Blondes' });
+    });
+  });
 });
